@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+frontend/dist/
+backend/dist/
+
+# Database (SQLite)
+backend/*.db
+backend/*.db-journal
+
+# Environment files (zawierają sekrety!)
+.env
+.env.local
+.env.production
+backend/.env
+frontend/.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test coverage
+coverage/
+
+# Misc
+*.tmp
+*.temp
+.cache/
+moje notatki.txt

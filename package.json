@@ -1,0 +1,18 @@
+{
+  "name": "auction-platform",
+  "version": "1.0.0",
+  "description": "Platforma aukcyjna dla surowców przemysłowych",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && npm start",
+    "dev": "cd backend && npm run dev",
+    "postinstall": "npm run install:all && npm run build"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": ["auction", "platform", "industrial"],
+  "author": "",
+  "license": "ISC"
+}
