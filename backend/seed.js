@@ -15,7 +15,8 @@ const categories = [
   { id: 'cat-006', name: 'Koła i rolki', icon: '⚙️', description: 'Koła transportowe, rolki, taśmy' },
   { id: 'cat-007', name: 'Bezpieczeństwo', icon: '🛡️', description: 'Kurtyny świetlne, wyłączniki, ogrodzenia' },
   { id: 'cat-008', name: 'Inne materiały', icon: '📦', description: 'Farby, smary, kleje, pneumatyka' },
-  { id: 'cat-009', name: 'Surowce chemiczne', icon: '🧫', description: 'Kwasy, zasady, rozpuszczalniki, odczynniki' }
+  { id: 'cat-009', name: 'Surowce chemiczne', icon: '🧫', description: 'Kwasy, zasady, rozpuszczalniki, odczynniki' },
+  { id: 'cat-010', name: 'Opakowania przemysłowe', icon: '🧴', description: 'Pojemniki IBC, kanistry, beczki, butelki' }
 ];
 
 const materials = [
@@ -79,7 +80,14 @@ const materials = [
   { id: 'mat-041', category_id: 'cat-009', name: 'Odczynniki laboratoryjne', description: 'Analizy chemiczne, kontrola jakości', unit: 'kg' },
   { id: 'mat-042', category_id: 'cat-009', name: 'Soda kaustyczna, kalcynowana', description: 'Przemysł szklarski, papierniczy, chemiczny', unit: 'kg' },
   { id: 'mat-043', category_id: 'cat-009', name: 'Nadtlenek wodoru (woda utleniona)', description: 'Dezynfekcja, bielenie, procesy utleniania', unit: 'kg' },
-  { id: 'mat-044', category_id: 'cat-009', name: 'Glikole (etylenowy, propylenowy)', description: 'Chłodziwa, płyny niezamarzające', unit: 'kg' }
+  { id: 'mat-044', category_id: 'cat-009', name: 'Glikole (etylenowy, propylenowy)', description: 'Chłodziwa, płyny niezamarzające', unit: 'kg' },
+
+  // OPAKOWANIA PRZEMYSŁOWE
+  { id: 'mat-045', category_id: 'cat-010', name: 'Paletopojemniki IBC 1000L', description: 'Pojemniki na płyny, chemikalia', unit: 'szt.' },
+  { id: 'mat-046', category_id: 'cat-010', name: 'Kanistry HDPE 5-60L', description: 'Kanistry plastikowe różnych pojemności', unit: 'szt.' },
+  { id: 'mat-047', category_id: 'cat-010', name: 'Beczki plastikowe 200L', description: 'Beczki na chemikalia, oleje', unit: 'szt.' },
+  { id: 'mat-048', category_id: 'cat-010', name: 'Butelki PET/HDPE', description: 'Butelki przemysłowe', unit: 'szt.' },
+  { id: 'mat-049', category_id: 'cat-010', name: 'Zakrętki i nakrętki', description: 'Zamknięcia do pojemników', unit: 'szt.' }
 ];
 
 const suppliers = [
@@ -206,7 +214,15 @@ const suppliers = [
   { id: 'sup-084', company_name: 'Avantor Performance Materials (POCH)', city: 'Gliwice', region: 'śląskie', address: 'ul. Sowińskiego 11', website: 'poch.com.pl', is_local: 0, categories: ['cat-009'] },
   { id: 'sup-085', company_name: 'Chempur', city: 'Piekary Śląskie', region: 'śląskie', address: 'ul. Lortza 70a', website: 'chempur.pl', is_local: 0, categories: ['cat-009'] },
   { id: 'sup-086', company_name: 'OQEMA Polska', city: 'Warszawa', region: 'mazowieckie', website: 'oqema.pl', is_local: 0, categories: ['cat-009'] },
-  { id: 'sup-087', company_name: 'Best-Chem', city: 'Łódź', region: 'łódzkie', website: 'bestchem.com.pl', is_local: 0, categories: ['cat-009'] }
+  { id: 'sup-087', company_name: 'Best-Chem', city: 'Łódź', region: 'łódzkie', website: 'bestchem.com.pl', is_local: 0, categories: ['cat-009'] },
+
+  // OPAKOWANIA PRZEMYSŁOWE
+  { id: 'sup-089', company_name: 'DD-PACK Sp. z o.o.', nip: '6342803283', city: 'Katowice', region: 'śląskie', website: '', is_local: 0, categories: ['cat-010'] },
+  { id: 'sup-090', company_name: 'IBC Service Recycling', nip: '5482662072', city: 'Ustroń', region: 'śląskie', website: '', is_local: 0, categories: ['cat-010'] },
+  { id: 'sup-091', company_name: 'RECOFASS Sp. z o.o.', nip: '7142057781', city: 'Kolechowice-Kolonia', region: 'lubelskie', website: '', is_local: 0, categories: ['cat-010'] },
+  { id: 'sup-092', company_name: 'Opack Serwis Sp. z o.o.', nip: '9731058042', city: 'Zielona Góra', region: 'lubuskie', website: '', is_local: 0, categories: ['cat-010'] },
+  { id: 'sup-093', company_name: 'ChemPak Kutno', nip: '7752668069', city: 'Kutno', region: 'łódzkie', website: '', is_local: 0, categories: ['cat-010'] },
+  { id: 'sup-094', company_name: 'SUWARY Sp. z o.o.', nip: '7311007350', city: 'Ksawerów', region: 'łódzkie', website: '', is_local: 0, categories: ['cat-010'] }
 ];
 
 async function seed() {
