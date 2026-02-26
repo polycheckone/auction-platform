@@ -14,9 +14,9 @@ backend/*.db-journal
 # Environment files (zawierają sekrety!)
 .env
 .env.local
-.env.production
 backend/.env
 frontend/.env
+# frontend/.env.production is safe to commit (public URLs only)
 
 # Logs
 logs/
