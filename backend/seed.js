@@ -203,7 +203,7 @@ const suppliers = [
   { id: 'sup-076', company_name: 'SMC Industrial Automation Polska', city: 'Błonie', region: 'mazowieckie', website: 'smc.eu', is_local: 0, categories: ['cat-008'] },
 
   // SUROWCE CHEMICZNE - lokalni Szczecin
-  { id: 'sup-077', company_name: 'Brenntag Polska', city: 'Szczecin', region: 'zachodniopomorskie', address: 'ul. Goleniowska 59', website: 'brenntag.com', is_local: 1, categories: ['cat-009'] },
+  { id: 'sup-077', company_name: 'Brenntag Polska', city: 'Szczecin', region: 'zachodniopomorskie', address: 'ul. Goleniowska 59', website: 'brenntag.com', is_local: 0, categories: ['cat-009'] },
 
   // SUROWCE CHEMICZNE - ogólnopolscy
   { id: 'sup-079', company_name: 'Donauchem Polska', city: 'Rokietnica', region: 'wielkopolskie', address: 'ul. Topolowa 15', website: 'donauchem.pl', is_local: 0, categories: ['cat-009'] },
