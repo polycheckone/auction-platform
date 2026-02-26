@@ -1,3 +1,15 @@
+# Status Deploymentu - W TRAKCIE TESTÓW
+
+## DO ZROBIENIA (następna sesja)
+1. **Utworzyć stronę /activate** - frontend nie ma strony aktywacji konta
+2. **Dodać FRONTEND_URL w Railway** - `FRONTEND_URL=https://auction-platform-production-e7a6.up.railway.app`
+3. Przetestować pełny flow zapraszania dostawcy
+
+## URL produkcyjny
+https://auction-platform-production-e7a6.up.railway.app
+
+---
+
 # Status Deploymentu - UKOŃCZONY
 
 ## Data: 2026-02-26
