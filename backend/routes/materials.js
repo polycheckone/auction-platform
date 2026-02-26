@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 const db = require('../database');
 const { authenticateToken, requireAdmin } = require('../middleware/auth');
 
@@ -82,7 +82,7 @@ router.get('/:id', authenticateToken, (req, res) => {
 router.post('/categories', authenticateToken, requireAdmin, (req, res) => {
   try {
     const { name, description, icon } = req.body;
-    const id = `cat-${uuidv4().slice(0, 8)}`;
+    const id = `cat-${crypto.randomUUID().slice(0, 8)}`;
 
     db.prepare(`
       INSERT INTO material_categories (id, name, description, icon)
@@ -100,7 +100,7 @@ router.post('/categories', authenticateToken, requireAdmin, (req, res) => {
 router.post('/', authenticateToken, requireAdmin, (req, res) => {
   try {
     const { category_id, name, description, unit } = req.body;
-    const id = `mat-${uuidv4().slice(0, 8)}`;
+    const id = `mat-${crypto.randomUUID().slice(0, 8)}`;
 
     db.prepare(`
       INSERT INTO materials (id, category_id, name, description, unit)

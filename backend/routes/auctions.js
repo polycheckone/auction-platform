@@ -1,5 +1,5 @@
 const express = require('express');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 const db = require('../database');
 const { authenticateToken, requireAdmin, requireSupplier } = require('../middleware/auth');
 const { auctionValidation, bidValidation, inviteValidation } = require('../middleware/validation');
@@ -257,7 +257,7 @@ module.exports = function(io) {
   router.post('/', authenticateToken, requireAdmin, auctionValidation, (req, res) => {
     try {
       const { title, description, material_id, custom_material_name, custom_material_unit, quantity, unit, duration_minutes, supplier_ids } = req.body;
-      const id = `auc-${uuidv4().slice(0, 8)}`;
+      const id = `auc-${crypto.randomUUID().slice(0, 8)}`;
 
       db.prepare(`
         INSERT INTO auctions (id, title, description, material_id, custom_material_name, custom_material_unit, quantity, unit, duration_minutes, status, created_by)
@@ -271,7 +271,7 @@ module.exports = function(io) {
           VALUES (?, ?, ?, 'pending')
         `);
         for (const supplierId of supplier_ids) {
-          insertInvitation.run(`inv-${uuidv4().slice(0, 8)}`, id, supplierId);
+          insertInvitation.run(`inv-${crypto.randomUUID().slice(0, 8)}`, id, supplierId);
         }
       }
 
@@ -303,7 +303,7 @@ module.exports = function(io) {
       `);
 
       for (const supplierId of supplier_ids) {
-        insertInvitation.run(`inv-${uuidv4().slice(0, 8)}`, auctionId, supplierId);
+        insertInvitation.run(`inv-${crypto.randomUUID().slice(0, 8)}`, auctionId, supplierId);
       }
 
       res.json({ message: 'Dostawcy zaproszeni' });
@@ -432,7 +432,7 @@ module.exports = function(io) {
       }
 
       // Dodaj ofertę
-      const bidId = `bid-${uuidv4().slice(0, 8)}`;
+      const bidId = `bid-${crypto.randomUUID().slice(0, 8)}`;
       db.prepare(`
         INSERT INTO bids (id, auction_id, supplier_id, amount)
         VALUES (?, ?, ?, ?)

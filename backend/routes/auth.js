@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 const db = require('../database');
 const {
   authenticateToken,
@@ -14,7 +14,7 @@ const { loginValidation, activateValidation, changePasswordValidation } = requir
 
 // Funkcja do zapisania refresh tokenu w bazie
 const saveRefreshToken = (userId, token) => {
-  const id = `rt-${uuidv4().slice(0, 8)}`;
+  const id = `rt-${crypto.randomUUID().slice(0, 8)}`;
   const expiresAt = new Date(Date.now() + REFRESH_TOKEN_EXPIRY_MS).toISOString();
 
   db.prepare(`

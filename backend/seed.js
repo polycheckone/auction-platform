@@ -1,6 +1,6 @@
 const Database = require('better-sqlite3');
 const path = require('path');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 
 const db = new Database(path.join(__dirname, 'auction.db'));

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
 const db = require('../database');
 const { authenticateToken, requireAdmin } = require('../middleware/auth');
@@ -254,7 +254,7 @@ router.post('/', authenticateToken, requireAdmin, supplierValidation, (req, res)
       });
     }
 
-    const id = `sup-${uuidv4().slice(0, 8)}`;
+    const id = `sup-${crypto.randomUUID().slice(0, 8)}`;
 
     db.prepare(`
       INSERT INTO suppliers (id, company_name, nip, address, city, region, phone, email, website, description, is_local)
@@ -295,8 +295,8 @@ router.post('/:id/invite', authenticateToken, requireAdmin, (req, res) => {
     }
 
     // Utwórz użytkownika z tokenem zaproszenia
-    const userId = `user-${uuidv4().slice(0, 8)}`;
-    const invitationToken = uuidv4();
+    const userId = `user-${crypto.randomUUID().slice(0, 8)}`;
+    const invitationToken = crypto.randomUUID();
     const invitationExpires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(); // 7 dni
 
     db.prepare(`

@@ -1,5 +1,5 @@
 const db = require('./database');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 
 // Najpierw dodaj kategorię "Opakowania przemysłowe" jeśli nie istnieje
 const existingCategory = db.prepare("SELECT id FROM material_categories WHERE name LIKE '%Opakowania%'").get();
@@ -85,7 +85,7 @@ for (const s of suppliers) {
     continue;
   }
 
-  const id = `sup-${uuidv4().slice(0, 8)}`;
+  const id = `sup-${crypto.randomUUID().slice(0, 8)}`;
   insertSupplier.run(id, s.company_name, s.nip, s.address, s.city, s.region, s.website, s.description);
   insertCategory.run(id, categoryId);
   console.log(`Dodano: ${s.company_name} (${s.city})`);
@@ -111,7 +111,7 @@ if (existingMaterials.count === 0) {
   `);
 
   for (const m of materials) {
-    const id = `mat-${uuidv4().slice(0, 8)}`;
+    const id = `mat-${crypto.randomUUID().slice(0, 8)}`;
     insertMaterial.run(id, categoryId, m.name, m.description, m.unit);
   }
   console.log('Dodano 5 materiałów do kategorii Opakowania przemysłowe');
