@@ -1,5 +1,75 @@
 # Changelog - Auction Platform
 
+## 2026-02-26 - Deployment na Railway (PRODUKCJA)
+
+### Deployment zakończony pomyślnie
+Aplikacja działa na Railway.app
+
+#### Naprawione błędy podczas deploymentu
+| Błąd | Rozwiązanie |
+|------|-------------|
+| `uuid` ESM error | Zamiana `require('uuid')` na `crypto.randomUUID()` |
+| Express 5 wildcard route | Zmiana `'*'` na `'/{*splat}'` |
+| Baza pusta po deploy | Auto-seed w `npm start`: `node seed.js && node server.js` |
+| CSRF blokuje login | Wyłączono CSRF (JWT w Authorization header jest CSRF-safe) |
+| Frontend łączy z localhost | Dodano `frontend/.env.production` do Git |
+
+#### Zmiany w plikach
+- **backend/package.json**: `start: "node seed.js && node server.js"`
+- **backend/server.js**: Wyłączono CSRF, naprawiono wildcard route
+- **backend/routes/*.js**: `crypto.randomUUID()` zamiast `uuid`
+- **backend/seed.js**: Dodano konta testowe dostawców
+- **.gitignore**: Usunięto `frontend/.env.production` z wykluczeń
+
+#### Konta testowe (produkcja)
+| Rola | Email | Hasło |
+|------|-------|-------|
+| Admin | `admin@auction.pl` | `admin123` |
+| Dostawca Brenntag | `dostawca@brenntag.pl` | `test123` |
+| Dostawca CIECH | `dostawca@ciech.pl` | `test123` |
+
+### Poprawki danych (seed.js)
+- ✅ Usunięto duplikat Brenntag (scalono sup-077 i sup-078)
+- ✅ Usunięto ALAMET (firma z Sosnowca, nie Szczecina)
+- ✅ Dodano HELION S.C. (sup-088, NIP: 9552311300, Szczecin, koła i rolki)
+
+### Nowa kategoria: Opakowania przemysłowe (cat-010)
+
+#### Materiały
+| ID | Nazwa |
+|----|-------|
+| mat-045 | Paletopojemniki IBC 1000L |
+| mat-046 | Kanistry HDPE 5-60L |
+| mat-047 | Beczki plastikowe 200L |
+| mat-048 | Butelki PET/HDPE |
+| mat-049 | Zakrętki i nakrętki |
+
+#### Dostawcy opakowań
+| Firma | Miasto | NIP |
+|-------|--------|-----|
+| DD-PACK Sp. z o.o. | Katowice | 6342803283 |
+| IBC Service Recycling | Ustroń | 5482662072 |
+| RECOFASS Sp. z o.o. | Kolechowice-Kolonia | 7142057781 |
+| Opack Serwis Sp. z o.o. | Zielona Góra | 9731058042 |
+| ChemPak Kutno | Kutno | 7752668069 |
+| SUWARY Sp. z o.o. | Ksawerów | 7311007350 |
+
+### Commity z tej sesji
+```
+7b53635 Add Opakowania przemysłowe category with materials and suppliers
+567f1ae Fix: Apply missing data changes from previous session
+4932a97 Add test supplier accounts to seed
+3ad86a3 Fix: Disable CSRF (JWT is CSRF-safe), remove duplicate Brenntag
+5d8434c Fix: Add frontend/.env.production for Railway build
+4be516f Fix: Exclude auth endpoints from CSRF protection
+db7d8e5 Fix: Auto-seed database on start
+1b98c80 Fix: Update wildcard route for Express 5
+8e2a9ac Fix: Replace uuid with crypto.randomUUID()
+d6d73fb Initial commit: Auction Platform
+```
+
+---
+
 ## 2026-02-24 (część 3) - Przygotowanie do deploymentu
 
 ### Railway Deployment
