@@ -180,7 +180,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(express.static(frontendBuildPath));
 
   // SPA fallback - serve index.html for all non-API routes
-  app.get('*', (req, res, next) => {
+  app.get('/{*splat}', (req, res, next) => {
     if (req.path.startsWith('/api') || req.path.startsWith('/socket.io')) {
       return next();
     }
