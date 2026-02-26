@@ -56,6 +56,11 @@ Aplikacja działa na Railway.app
 
 ### Commity z tej sesji
 ```
+075716f Fix: Only seed database on first run, preserve user data
+e9af6e5 Add /activate page for supplier account activation
+e3dfac4 Fix: Brenntag is national (is_local: 0), not local
+2a09177 Fix: Supplier account linking and auction visibility
+12dd77a Update CHANGELOG and DEPLOY_STATUS with full session history
 7b53635 Add Opakowania przemysłowe category with materials and suppliers
 567f1ae Fix: Apply missing data changes from previous session
 4932a97 Add test supplier accounts to seed
@@ -67,6 +72,17 @@ db7d8e5 Fix: Auto-seed database on start
 8e2a9ac Fix: Replace uuid with crypto.randomUUID()
 d6d73fb Initial commit: Auction Platform
 ```
+
+### Dodatkowe poprawki (koniec sesji)
+- **Strona /activate** - formularz ustawiania hasła dla nowych dostawców
+- **Seed sprawdza dane** - nie nadpisuje istniejących danych przy restarcie
+- **Brenntag is_local: 0** - poprawiony na ogólnopolski
+- **Linkowanie kont** - przeniesione PO dodaniu dostawców do bazy
+- **Widoczność aukcji** - dostawca bez powiązanego konta nie widzi żadnych aukcji
+
+### ZNANY PROBLEM: SQLite na Railway
+Railway ma "ephemeral filesystem" - baza SQLite jest kasowana przy każdym restarcie kontenera.
+**Rozwiązanie:** migracja na PostgreSQL (następna sesja)
 
 ---
 

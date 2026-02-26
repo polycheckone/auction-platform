@@ -1,9 +1,14 @@
 # Status Deploymentu - W TRAKCIE TESTÓW
 
 ## DO ZROBIENIA (następna sesja)
-1. **Utworzyć stronę /activate** - frontend nie ma strony aktywacji konta
+1. ~~Utworzyć stronę /activate~~ - ZROBIONE
 2. **Dodać FRONTEND_URL w Railway** - `FRONTEND_URL=https://auction-platform-production-e7a6.up.railway.app`
-3. Przetestować pełny flow zapraszania dostawcy
+3. **KRYTYCZNE: Przejść na PostgreSQL** - SQLite nie działa na Railway (ephemeral filesystem)
+4. Przetestować pełny flow zapraszania dostawcy
+
+## Problem z bazą danych
+Railway ma "ephemeral filesystem" - SQLite jest kasowana przy każdym restarcie kontenera.
+Rozwiązanie: migracja na PostgreSQL (Railway oferuje darmową bazę PostgreSQL).
 
 ## URL produkcyjny
 https://auction-platform-production-e7a6.up.railway.app
