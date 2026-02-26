@@ -317,6 +317,17 @@ async function seed() {
   insertUser.run('admin-001', 'admin@auction.pl', adminPassword, 'Administrator', 'admin', 1);
   console.log('Admin utworzony: admin@auction.pl / admin123');
 
+  // Dodanie testowych kont dostawców
+  const supplierPassword = await bcrypt.hash('test123', 10);
+  insertUser.run('user-brenntag', 'dostawca@brenntag.pl', supplierPassword, 'Brenntag Polska', 'supplier', 1);
+  insertUser.run('user-ciech', 'dostawca@ciech.pl', supplierPassword, 'CIECH S.A.', 'supplier', 1);
+  console.log('Dostawcy testowi: dostawca@brenntag.pl / test123, dostawca@ciech.pl / test123');
+
+  // Powiązanie kont z dostawcami
+  const linkSupplierUser = db.prepare(`UPDATE suppliers SET user_id = ? WHERE id = ?`);
+  linkSupplierUser.run('user-brenntag', 'sup-077');  // Brenntag Polska
+  linkSupplierUser.run('user-ciech', 'sup-080');     // CIECH S.A.
+
   // Dodanie kategorii
   const insertCategory = db.prepare(`INSERT OR REPLACE INTO material_categories (id, name, description, icon) VALUES (?, ?, ?, ?)`);
   for (const cat of categories) {
