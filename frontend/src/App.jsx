@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
 import Layout from './components/Layout';
 import Login from './pages/Login';
+import Activate from './pages/Activate';
 import Dashboard from './pages/Dashboard';
 import Materials from './pages/Materials';
 import Suppliers from './pages/Suppliers';
@@ -59,6 +60,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
+      <Route path="/activate" element={<Activate />} />
       <Route
         path="/"
         element={
