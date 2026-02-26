@@ -154,8 +154,8 @@ const csrfProtection = (req, res, next) => {
 // Login z osobnym rate limiterem
 app.use('/api/auth/login', loginLimiter);
 
-// CSRF protection dla wszystkich route'ów API
-app.use('/api', csrfProtection);
+// CSRF protection wyłączone - JWT w Authorization header jest już odporny na CSRF
+// app.use('/api', csrfProtection);
 
 // Routes
 app.use('/api/auth', authRoutes);

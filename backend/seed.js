@@ -194,10 +194,9 @@ const suppliers = [
   { id: 'sup-076', company_name: 'SMC Industrial Automation Polska', city: 'Błonie', region: 'mazowieckie', website: 'smc.eu', is_local: 0, categories: ['cat-008'] },
 
   // SUROWCE CHEMICZNE - lokalni Szczecin
-  { id: 'sup-077', company_name: 'Brenntag Polska - Oddział Szczecin', city: 'Szczecin', region: 'zachodniopomorskie', address: 'ul. Goleniowska 59', website: 'brenntag.com', is_local: 1, categories: ['cat-009'] },
+  { id: 'sup-077', company_name: 'Brenntag Polska', city: 'Szczecin', region: 'zachodniopomorskie', address: 'ul. Goleniowska 59', website: 'brenntag.com', is_local: 1, categories: ['cat-009'] },
 
   // SUROWCE CHEMICZNE - ogólnopolscy
-  { id: 'sup-078', company_name: 'Brenntag Polska (Centrala)', city: 'Kędzierzyn-Koźle', region: 'opolskie', address: 'ul. Józefa Bema 21', website: 'brenntag.com', is_local: 0, categories: ['cat-009'] },
   { id: 'sup-079', company_name: 'Donauchem Polska', city: 'Rokietnica', region: 'wielkopolskie', address: 'ul. Topolowa 15', website: 'donauchem.pl', is_local: 0, categories: ['cat-009'] },
   { id: 'sup-080', company_name: 'CIECH S.A. (Qemetica)', city: 'Warszawa', region: 'mazowieckie', address: 'ul. Wspólna 62', website: 'qemetica.com', is_local: 0, categories: ['cat-009'] },
   { id: 'sup-081', company_name: 'Stanlab Sp. z o.o.', city: 'Lublin', region: 'lubelskie', address: 'ul. Olszewskiego 13', website: 'stanlab.eu', is_local: 0, categories: ['cat-009'] },
