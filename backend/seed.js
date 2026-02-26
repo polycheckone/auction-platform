@@ -226,9 +226,9 @@ const suppliers = [
 ];
 
 async function seed() {
-  console.log('Rozpoczynam seedowanie bazy danych...');
+  console.log('Sprawdzam bazę danych...');
 
-  // Tworzenie tabel
+  // Tworzenie tabel (zawsze)
   db.exec(`
     CREATE TABLE IF NOT EXISTS users (
       id TEXT PRIMARY KEY,
@@ -327,6 +327,15 @@ async function seed() {
       FOREIGN KEY (supplier_id) REFERENCES suppliers(id)
     );
   `);
+
+  // Sprawdź czy dane już istnieją
+  const existingAdmin = db.prepare('SELECT id FROM users WHERE id = ?').get('admin-001');
+  if (existingAdmin) {
+    console.log('Baza już zawiera dane - pomijam seedowanie');
+    return;
+  }
+
+  console.log('Pierwsza inicjalizacja - dodaję dane początkowe...');
 
   // Dodanie admina
   const adminPassword = await bcrypt.hash('admin123', 10);
