@@ -340,11 +340,6 @@ async function seed() {
   insertUser.run('user-ciech', 'dostawca@ciech.pl', supplierPassword, 'CIECH S.A.', 'supplier', 1);
   console.log('Dostawcy testowi: dostawca@brenntag.pl / test123, dostawca@ciech.pl / test123');
 
-  // Powiązanie kont z dostawcami
-  const linkSupplierUser = db.prepare(`UPDATE suppliers SET user_id = ? WHERE id = ?`);
-  linkSupplierUser.run('user-brenntag', 'sup-077');  // Brenntag Polska
-  linkSupplierUser.run('user-ciech', 'sup-080');     // CIECH S.A.
-
   // Dodanie kategorii
   const insertCategory = db.prepare(`INSERT OR REPLACE INTO material_categories (id, name, description, icon) VALUES (?, ?, ?, ?)`);
   for (const cat of categories) {
@@ -370,6 +365,12 @@ async function seed() {
     }
   }
   console.log(`Dodano ${suppliers.length} dostawców`);
+
+  // Powiązanie kont testowych z dostawcami (musi być PO dodaniu dostawców!)
+  const linkSupplierUser = db.prepare(`UPDATE suppliers SET user_id = ? WHERE id = ?`);
+  linkSupplierUser.run('user-brenntag', 'sup-077');  // Brenntag Polska
+  linkSupplierUser.run('user-ciech', 'sup-080');     // CIECH S.A.
+  console.log('Powiązano konta testowe z dostawcami');
 
   console.log('Seedowanie zakończone!');
 }

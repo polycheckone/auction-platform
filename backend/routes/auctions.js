@@ -96,6 +96,9 @@ module.exports = function(io) {
         if (supplier) {
           baseQuery += ` AND a.id IN (SELECT auction_id FROM auction_invitations WHERE supplier_id = ?)`;
           params.push(supplier.id);
+        } else {
+          // Brak powiązanego dostawcy - nie pokazuj żadnych aukcji
+          baseQuery += ` AND 1 = 0`;
         }
       }
 
