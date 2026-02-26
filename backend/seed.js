@@ -140,7 +140,7 @@ const suppliers = [
   // ELEMENTY ZŁĄCZNE - lokalni
   { id: 'sup-039', company_name: 'ŚRUBEX', city: 'Szczecin', region: 'zachodniopomorskie', website: 'srubex.pl', is_local: 1, categories: ['cat-005'] },
   { id: 'sup-040', company_name: 'WERBUS', city: 'Szczecin', region: 'zachodniopomorskie', website: 'werbus.pl', is_local: 1, categories: ['cat-005'] },
-  { id: 'sup-041', company_name: 'ALAMET', city: 'Szczecin', region: 'zachodniopomorskie', website: 'alamet-zamocowania.pl', is_local: 1, categories: ['cat-005'] },
+  // ALAMET usunięty - firma z Sosnowca, nie Szczecina
   { id: 'sup-042', company_name: 'Unimet s.c.', city: 'Szczecin', region: 'zachodniopomorskie', address: 'ul. Kalenicka 15', website: '', is_local: 1, categories: ['cat-005'] },
   { id: 'sup-043', company_name: 'TLC Łożyska', city: 'Szczecin', region: 'zachodniopomorskie', website: 'tlc.pl', is_local: 1, categories: ['cat-005'] },
   { id: 'sup-044', company_name: 'QUAY', city: 'Szczecin', region: 'zachodniopomorskie', website: 'quay.pl', is_local: 1, categories: ['cat-005'] },
@@ -156,6 +156,7 @@ const suppliers = [
   // KOŁA I ROLKI - lokalni
   { id: 'sup-051', company_name: 'Castors.pl', city: 'Szczecin', region: 'zachodniopomorskie', website: 'castors.pl', is_local: 1, categories: ['cat-006'] },
   { id: 'sup-052', company_name: 'NOVA Szczecin', city: 'Szczecin', region: 'zachodniopomorskie', website: '', is_local: 1, categories: ['cat-006'] },
+  { id: 'sup-088', company_name: 'HELION S.C.', nip: '9552311300', city: 'Szczecin', region: 'zachodniopomorskie', website: '', is_local: 1, categories: ['cat-006'] },
 
   // KOŁA I ROLKI - ogólnopolscy
   { id: 'sup-053', company_name: 'Blickle Polska', city: 'Poznań', region: 'wielkopolskie', website: 'blickle.pl', is_local: 0, categories: ['cat-006'] },
@@ -343,11 +344,11 @@ async function seed() {
   console.log(`Dodano ${materials.length} materiałów`);
 
   // Dodanie dostawców
-  const insertSupplier = db.prepare(`INSERT OR REPLACE INTO suppliers (id, company_name, city, region, address, website, is_local) VALUES (?, ?, ?, ?, ?, ?, ?)`);
+  const insertSupplier = db.prepare(`INSERT OR REPLACE INTO suppliers (id, company_name, nip, city, region, address, website, is_local) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`);
   const insertSupplierCategory = db.prepare(`INSERT OR REPLACE INTO supplier_categories (supplier_id, category_id) VALUES (?, ?)`);
 
   for (const sup of suppliers) {
-    insertSupplier.run(sup.id, sup.company_name, sup.city, sup.region, sup.address || '', sup.website || '', sup.is_local);
+    insertSupplier.run(sup.id, sup.company_name, sup.nip || '', sup.city, sup.region, sup.address || '', sup.website || '', sup.is_local);
     for (const catId of sup.categories) {
       insertSupplierCategory.run(sup.id, catId);
     }
