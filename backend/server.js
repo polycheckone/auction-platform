@@ -125,6 +125,13 @@ const csrfProtection = (req, res, next) => {
     return next();
   }
 
+  // Pomijaj CSRF dla endpointów auth (login, refresh, activate)
+  if (req.path.startsWith('/auth/login') ||
+      req.path.startsWith('/auth/refresh') ||
+      req.path.startsWith('/auth/activate')) {
+    return next();
+  }
+
   // W trybie development pomijamy CSRF dla wygody
   if (process.env.NODE_ENV !== 'production') {
     return next();
