@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
+import { initializeCSRF } from './api';
 import Layout from './components/Layout';
 import Login from './pages/Login';
 import Activate from './pages/Activate';
@@ -88,6 +90,10 @@ function AppRoutes() {
 }
 
 function App() {
+  useEffect(() => {
+    initializeCSRF().catch(console.error);
+  }, []);
+
   return (
     <AuthProvider>
       <ToastProvider>

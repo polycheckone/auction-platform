@@ -10,6 +10,25 @@ const api = axios.create({
   baseURL: API_URL,
 });
 
+// CSRF token storage
+let csrfToken = null;
+
+// Pobranie tokena CSRF
+const fetchCSRFToken = async () => {
+  const response = await axios.get(`${API_URL}/csrf-token`, {
+    withCredentials: true
+  });
+  csrfToken = response.data.csrfToken;
+  return csrfToken;
+};
+
+// Inicjalizacja CSRF - wywołaj przy starcie aplikacji
+export const initializeCSRF = async () => {
+  if (!csrfToken) {
+    await fetchCSRFToken();
+  }
+};
+
 // Flaga zapobiegająca wielokrotnym próbom odświeżenia
 let isRefreshing = false;
 let failedQueue = [];
@@ -25,12 +44,25 @@ const processQueue = (error, token = null) => {
   failedQueue = [];
 };
 
-// Interceptor do dodawania tokenu
-api.interceptors.request.use((config) => {
+// Interceptor do dodawania tokenu JWT i CSRF
+api.interceptors.request.use(async (config) => {
   const token = localStorage.getItem('accessToken');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+
+  // Dodaj CSRF token dla POST/PUT/DELETE/PATCH
+  if (['post', 'put', 'delete', 'patch'].includes(config.method?.toLowerCase())) {
+    const exemptPaths = ['/auth/login', '/auth/refresh', '/auth/activate'];
+    const isExempt = exemptPaths.some(path => config.url?.includes(path));
+
+    if (!isExempt) {
+      if (!csrfToken) await fetchCSRFToken();
+      config.headers['X-CSRF-Token'] = csrfToken;
+    }
+  }
+
+  config.withCredentials = true;
   return config;
 });
 
@@ -93,6 +125,16 @@ api.interceptors.response.use(
       } finally {
         isRefreshing = false;
       }
+    }
+
+    // Obsługa błędu 403 CSRF - retry z nowym tokenem
+    if (error.response?.status === 403 &&
+        error.response?.data?.error?.includes('CSRF') &&
+        !originalRequest._csrfRetry) {
+      originalRequest._csrfRetry = true;
+      await fetchCSRFToken();
+      originalRequest.headers['X-CSRF-Token'] = csrfToken;
+      return api(originalRequest);
     }
 
     // Inne błędy 401 (nieprawidłowy token, brak tokenu)
